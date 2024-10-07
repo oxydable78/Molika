@@ -1,4 +1,4 @@
 services:
-  molika:
+   app:
     build: .
     container_name: Molika
