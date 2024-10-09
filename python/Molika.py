@@ -7,11 +7,15 @@ from datetime import datetime
 chemin_journal = f"/molika/log/{datetime.now().strftime('%Y-%m-%d')}_molika.csv"
 date = datetime.now().strftime("%Y-%m-%d")
 date_file = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
 user = os.environ.get('USER')
+if user is None:
+    user = 'root'
 
 def condition(texte):
     # Vous devez définir cette fonction pour qu'elle fasse quelque chose avec le texte
     return "Résultat de la condition"
+
 
 def logexp(texte, result):
     existe_deja = os.path.isfile(chemin_journal)
@@ -25,6 +29,7 @@ def logexp(texte, result):
 
         writer.writerow({'Date': date_file, 'Utilisateur': user, 'Commande_Input': texte, 'Output': result})
 
+
 if __name__ == "__main__":
     ## permet de définir le nombre d'argument a la commande
     if len(sys.argv) > 2:
@@ -32,6 +37,7 @@ if __name__ == "__main__":
         texte = sys.argv[2]
 
         result = condition(texte)
+        print(result)
 
         if log != "logoff":
             logexp(texte, result)
